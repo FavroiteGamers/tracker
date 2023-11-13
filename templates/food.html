@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Track Food | {% block super %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+  <!-- Add DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+  <div class="container mt-5">
+    <h1>Track Food</h1>
+    <p>Total Calories: {{ total_calories }}</p>
+
+    <a href="/food/add" class="btn btn-primary mb-3">Add Food</a>
+    <table id="foodInstancesTable" class="display">
+      <thead>
+        <tr>
+          <th>Food</th>
+          <th>Times</th>
+          <th>Date</th>
+          <th>Calories</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for food_instance in food_instances %}
+          <tr>
+            <td>{{ food_instance.food|default:"N/A" }}</td>
+            <td>{{ food_instance.times|default:"N/A" }}</td>
+            <td>{{ food_instance.date }}</td>
+            <td>{{ food_instance.calories|default:"N/A" }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Add DataTables JS after including jQuery -->
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('#foodInstancesTable').DataTable({
+        "order": [[2, 'desc']]
+      });
+    });
+  </script>
+
+  <style>
+    /* Custom styles for DataTables in dark mode */
+    body.dark-mode #foodInstancesTable,
+    body.dark-mode #foodInstancesTable input,
+    body.dark-mode #foodInstancesTable_filter input,
+    body.dark-mode #foodInstancesTable th,
+    body.dark-mode #foodInstancesTable td,
+    body.dark-mode #foodInstancesTable_filter label,
+    body.dark-mode #foodInstancesTable_filter,
+    body.dark-mode #foodInstancesTable_info,
+    body.dark-mode #foodInstancesTable_length,
+    body.dark-mode #foodInstancesTable_length select,
+    body.dark-mode #foodInstancesTable_paginate.paginate_button
+    {
+      background-color: #121212 !important;
+      color: #ffffff !important;
+    }
+  </style>
+{% endblock %}

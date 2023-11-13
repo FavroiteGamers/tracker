@@ -1,0 +1,35 @@
+<!-- some_template.html -->
+
+{% extends "base.html" %}
+
+{% block title %}
+  BMR Calculation | {% block super %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1>Basal Metabolic Rate (BMR) Calculation</h1>
+    
+    <p>
+      {% if user.is_authenticated %}
+        Hello, {{ user.username }}!
+      {% else %}
+        Welcome, Guest!
+      {% endif %}
+    </p>
+
+    {% if user.gender %}
+      <p>Your BMR based on the provided information:</p>
+      <ul>
+        <li>Gender: {{ user.get_gender_display }}</li>
+        <li>Weight: {{ user.weight }} kg</li>
+        <li>Height: {{ user.height }} cm</li>
+        <li>Age: {{ user.age }} years</li>
+      </ul>
+
+      <p>Your calculated BMR is: {{ bmr }} calories per day</p>
+    {% else %}
+      <p>Please provide gender information in your profile to calculate BMR.</p>
+    {% endif %}
+  </div>
+{% endblock %}

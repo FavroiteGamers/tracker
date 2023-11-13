@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Track Food | {% block super %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="mb-4">Track your eating!</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        {{ form.food.label_tag }}
+        {{ form.food }}
+      </div>
+      <div class="mb-3">
+        {{ form.times.label_tag }}
+        {{ form.times }}
+      </div>
+      <div class="mb-3">
+        {{ form.date.label_tag }}
+        {{ form.date }}
+        {{ form.date.errors }}
+      </div>
+      <div class="d-flex justify-content-left align-items-center mb-2">
+        <button type="submit" class="btn btn-primary">Add Food</button>
+        <a href="/food" class="btn btn-secondary">Back</a>
+      </div>
+    </form>
+  </div>
+
+  {# Additional styles/scripts specific to this template #}
+  <style>
+    /* Add specific styles for this template if needed */
+  </style>
+  
+  {# Include specific scripts for this template if needed #}
+  <script>
+    // Add specific scripts for this template if needed
+  </script>
+{% endblock %}

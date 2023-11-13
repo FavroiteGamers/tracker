@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Track Exercise | {% block super %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h1 class="mb-4">Track your Exercise!</h1>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="mb-3">
+        {{ form.exercise.label_tag }}
+        {{ form.exercise }}
+        {{ form.exercise.errors }}
+      </div>
+      <div class="mb-3">
+        {{ form.times.label_tag }}
+        {{ form.times }}
+        {{ form.times.errors }}
+      </div>
+      <div class="mb-3">
+        {{ form.date.label_tag }}
+        {{ form.date }}
+        {{ form.date.errors }}
+      </div>
+      <div class="mb-3">
+        {{ form.duration.label_tag }}
+        {{ form.duration }}
+        {{ form.duration.errors }}
+      </div>
+      <div class="d-flex justify-content-left align-items-center mb-2">
+        <button type="submit" class="btn btn-primary">Add Exercise</button>
+        <a href="/exercise" class="btn btn-secondary">Back</a>
+      </div>
+    </form>
+  </div>
+
+  {# Additional styles/scripts specific to this template #}
+  <style>
+    /* Add specific styles for this template if needed */
+  </style>
+  
+  {# Include specific scripts for this template if needed #}
+  <script>
+    // Add specific scripts for this template if needed
+  </script>
+{% endblock %}

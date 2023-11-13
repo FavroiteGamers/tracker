@@ -1,0 +1,18 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<figure class="text-center">
+{% if user.is_authenticated %}
+<div class="d-flex justify-content-start">
+  <h1>Hi {{ user.username }}!</h4>
+</div>
+{% else %}
+<div class="d-flex justify-content-start">
+  <h1>Hi, please login in!</h1>
+</div>
+{% endif %}
+</figure>
+
+{% endblock %}

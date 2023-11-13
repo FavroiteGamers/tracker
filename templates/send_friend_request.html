@@ -1,0 +1,7 @@
+<!-- send_friend_request.html -->
+<h2>Send Friend Request to {{ to_user.username }}</h2>
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send Friend Request</button>
+</form>

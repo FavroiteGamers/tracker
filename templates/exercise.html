@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Track Exercise | {% block super %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+  <!-- Add DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+  <div class="container mt-5">
+    <h1>Track Exercise</h1>
+    <a href="/exercise/add" class="btn btn-primary mb-3">Add Exercise</a>
+    <table id="exerciseInstancesTable" class="display">
+      <thead>
+        <tr>
+          <th>Exercise</th>
+          <th>Time</th>
+          <th>Date</th>
+          <th>Duration</th> <!-- Add this line for the new column -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for exercise_instance in exercise_instances %}
+          <tr>
+            <td>{{ exercise_instance.exercise|default:"N/A" }}</td>
+            <td>{{ exercise_instance.times|default:"N/A" }}</td>
+            <td>{{ exercise_instance.date }}</td>
+            <td>{{ exercise_instance.duration|default:"N/A" }}</td> <!-- Add this line for the new column -->
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  <!-- Add DataTables JS after including jQuery -->
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('#exerciseInstancesTable').DataTable({
+        "order": [[2, 'desc']]  // Order by date column in descending order by default
+      });
+    });
+  </script>
+
+  <style>
+    /* Custom styles for DataTables in dark mode */
+    body.dark-mode #exerciseInstancesTable,
+    body.dark-mode #exerciseInstancesTable input,
+    body.dark-mode #exerciseInstancesTable_filter input,
+    body.dark-mode #exerciseInstancesTable th,
+    body.dark-mode #exerciseInstancesTable td,
+    body.dark-mode #exerciseInstancesTable_filter label,
+    body.dark-mode #exerciseInstancesTable_filter,
+    body.dark-mode #exerciseInstancesTable_info,
+    body.dark-mode #exerciseInstancesTable_length,
+    body.dark-mode #exerciseInstancesTable_length select,
+    body.dark-mode #exerciseInstancesTable_paginate.paginate_button
+    {
+      background-color: #121212 !important; /* Dark background color */
+      color: #ffffff !important; /* White text color */
+    }
+  </style>
+{% endblock %}
